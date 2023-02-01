@@ -17,3 +17,8 @@ export interface IUpdateRequest{
     telefone?: string,
     senha?: string
 }
+
+export interface ILogin{
+    email: string,
+    senha: string
+}
