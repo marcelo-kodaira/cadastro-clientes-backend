@@ -5,27 +5,33 @@ import { IPerson, IUpdateRequest } from "../interfaces/clients"
 import AppError from "../Error/AppError"
 import { hashSync } from "bcrypt"
 
-const updateService = async ({email,nome,telefone, senha:password}:IUpdateRequest, repo: typeof Contacts | typeof Clients, id:string ):Promise<IPerson> =>{
+const updateService = async ({email,nome,telefone, senha:password}:IUpdateRequest, repo: typeof Contacts | typeof Clients, id:string, clientId: string ):Promise<IPerson> =>{
 
+    const repositoryClients = AppDataSource.getRepository(Clients)
+    const repositoryContacts = AppDataSource.getRepository(Contacts)
     const repository = AppDataSource.getRepository(repo)
 
-    const userFound = await repository.findOneBy({id})
-
-    if(!userFound){
-        throw new AppError('Usuário não encontrado')
-    }
-
+    const clientFound = await repositoryClients.findOneBy({
+        id: clientId
+    })
 
     if(repo === Clients){
-        const createdUser = repository.update(
+        await repositoryClients.update(
             id,{
             nome,
             email,
             senha: password && hashSync(password, 10),
             telefone
-        } as Clients)
+        })
     }else{
-        const updated = await repository.update(id,{
+        const contactRelated = await repositoryContacts.findOneBy({
+            clients: clientFound!
+        })
+        if(!contactRelated){
+            throw new AppError('Você não pode alterar este contato', 403)
+        }
+
+        await repositoryContacts.update(id,{
             email,
             nome,
             telefone,

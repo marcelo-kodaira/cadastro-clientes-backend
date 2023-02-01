@@ -1,11 +1,8 @@
 import AppError from "../Error/AppError"
 import AppDataSource from "../data-source"
 import { ICreateRequest, IPerson } from "../interfaces/clients"
-import Contacts from "../entities/contacts.entity"
 import Clients from "../entities/clients.entity"
 import { hashSync } from "bcrypt"
-import { sensitiveHeaders } from "http2"
-
 
 const createClientService = async ({nome, email,senha:password, telefone}:ICreateRequest):Promise<IPerson> =>{
 
@@ -27,6 +24,8 @@ const createClientService = async ({nome, email,senha:password, telefone}:ICreat
         telefone
 
     })
+
+    await repository.save(createdUser)
 
     const {senha, ...rest} = createdUser;
     return rest

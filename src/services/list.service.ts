@@ -1,7 +1,7 @@
 import AppDataSource from "../data-source"
 import Contacts from "../entities/contacts.entity"
 import Clients from "../entities/clients.entity"
-import { ICreateRequest, IPerson } from "../interfaces/clients"
+import { IPerson } from "../interfaces/clients"
 import AppError from "../Error/AppError"
 
 const listService = async (repo: typeof Contacts | typeof Clients):Promise<IPerson[]> =>{
@@ -13,7 +13,7 @@ const listService = async (repo: typeof Contacts | typeof Clients):Promise<IPers
         throw new AppError('Nenhum registro encontrado',404)
     }
 
-    if (("senha" in list) && (repo === Clients)) {
+    if ((repo === Clients)) {
         const listNoPassword = list.map(obj => {
           if (obj instanceof Clients) {
             const {senha, ...rest} = obj as Clients;
@@ -23,7 +23,6 @@ const listService = async (repo: typeof Contacts | typeof Clients):Promise<IPers
         });
         return listNoPassword
       } 
-
     return list
 }
 

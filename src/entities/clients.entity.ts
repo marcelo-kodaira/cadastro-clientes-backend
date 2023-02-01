@@ -26,7 +26,7 @@ class Clients{
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToMany(() => Contacts, (contact) => contact.clients)
+    @OneToMany(() => Contacts, (contact) => contact.clients, {onDelete: "CASCADE"})
     contacts: Contacts[]
 }
 

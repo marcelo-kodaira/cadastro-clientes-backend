@@ -9,14 +9,14 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) =>{
     const token = req.headers.authorization?.split(" ")[1]
     jwt.verify(token as string, process.env.SECRET_KEY as string, (err: any, decoded: any) => {
         req.user ={
-            id: decoded.id
+            id: decoded.sub
         }
         next()
     }
     )
     }catch(err){
         if(err instanceof Error)
-        return res.status(401).json({messsage: err.message})
+        return res.status(401).json({messsage: "token inválido"})
     }
 }
 
