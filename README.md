@@ -12,13 +12,13 @@ Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
 | Método | Endpoint | Responsabilidade | Autorização
 | --- | --- | --- | --- |
 | POST | /clients | Criação de cliente | 
-| GET | /clients | Lista todos os cliente | 
+| GET | /clients/all | Lista todos os cliente | Precisa ser Administrador |
 | GET | /clients/contacts | Lista todos os contatos cadastrados pelo cliente |
 | PATCH | /clients | Atualiza um cliente | Precisa estar logado |
 | DELETE | /clients | Realiza o delete do cliente | Precisa estar logado |
 | POST | /clients/login | Gera o token de autenticação |
 | POST | /contacts | Cria um contato | Precisa estar logado |
-| GET | /contacts/all | Lista todos os contatos cadastrados |
+| GET | /contacts/all | Lista todos os contatos cadastrados | Precisa ser Administrador |
 | PATCH | /contacts | Atualiza um contato | Precisa estar logado |
 | DELETE | /contacts | Deleta um contato | Precisa estar logado |
 
