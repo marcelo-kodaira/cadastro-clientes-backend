@@ -2,6 +2,7 @@ import app from "./app";
 import AppDataSource from "./data-source";
 import 'dotenv/config'
 
+
 (async () => {
 
     await AppDataSource.initialize()
