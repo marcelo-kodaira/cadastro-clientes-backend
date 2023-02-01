@@ -4,13 +4,13 @@ import Contacts from "../entities/contacts.entity";
 
 
 const addRepositoryToRequest = (req: Request, res: Response, next: NextFunction) => {
-    if (req.url.includes('contact')) {
+    if (req.originalUrl.includes('contacts')) {
       req.repository = Contacts
-    } else if (req.url.includes('client')) {
+    } else if (req.originalUrl.includes('clients')) {
       req.repository = Clients
     }else {
         return res.status(400).send({
-          error: "Route path must include either 'contact' or 'client'"
+          error: 'req.originalUrl'
         });
       }
     next();

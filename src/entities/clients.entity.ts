@@ -10,11 +10,15 @@ class Clients{
     @Column()
     nome: string
 
+
     @Column()
     telefone: string
 
     @Column()
     email: string
+
+    @Column()
+    senha: string
 
     @CreateDateColumn()
     createdAt: Date

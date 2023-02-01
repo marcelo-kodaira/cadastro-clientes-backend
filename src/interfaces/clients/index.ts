@@ -7,11 +7,13 @@ export interface IPerson{
 export interface ICreateRequest{
     nome: string,
     email: string,
-    telefone: string
+    telefone: string,
+    senha: string
 }
 
 export interface IUpdateRequest{
     nome?: string,
     email?: string,
-    telefone?: string
+    telefone?: string,
+    senha?: string
 }

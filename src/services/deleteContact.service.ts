@@ -1,7 +1,7 @@
 import AppDataSource from "../data-source"
 import Contacts from "../entities/contacts.entity"
 import Clients from "../entities/clients.entity"
-import AppError from "../Error"
+import AppError from "../Error/AppError"
 
 const deleteService = async(id:string, repo: typeof Contacts | typeof Clients):Promise<void> =>{
 

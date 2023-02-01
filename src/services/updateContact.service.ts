@@ -2,9 +2,10 @@ import AppDataSource from "../data-source"
 import Contacts from "../entities/contacts.entity"
 import Clients from "../entities/clients.entity"
 import { IPerson, IUpdateRequest } from "../interfaces/clients"
-import AppError from "../Error"
+import AppError from "../Error/AppError"
+import { hashSync } from "bcrypt"
 
-const updateService = async ({email,nome,telefone}:IUpdateRequest, repo: typeof Contacts | typeof Clients, id:string ):Promise<IPerson> =>{
+const updateService = async ({email,nome,telefone, senha:password}:IUpdateRequest, repo: typeof Contacts | typeof Clients, id:string ):Promise<IPerson> =>{
 
     const repository = AppDataSource.getRepository(repo)
 
@@ -17,13 +18,15 @@ const updateService = async ({email,nome,telefone}:IUpdateRequest, repo: typeof 
     const updated = await repository.update(id,{
         email,
         nome,
-        telefone
+        telefone,
+        senha : password && hashSync(password, 10)
     })
 
     const updatedUser = await repository.findOneBy({id})
 
+    const {senha, ...userNoPassword} = updatedUser!
 
-    return updatedUser!
+    return userNoPassword
 
 }
 export default updateService
