@@ -25,23 +25,20 @@ Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
 
 ## Requisições e retornos
 
-### POST - /users
+### POST - /clients
 Rota para criação de usuário com os seguintes dados:
+- id: uuidv4.
 - name: string
 - email: string
 - password: Deverá receber uma string mas armazenar uma hash gerada com o bcrypt
-- isAdm: boolean
-- isActive: Gerado no momento da validação dos dados no formato boolean com default = true
 - createdAt: Gerado no momento da validação dos dados no formato Date
 - updatedAt: Gerado no momento da validação dos dados no formato Date
-- id: uuidv4.
 
 A rota de criação retorna todos os dados, com exceção da hash de senha.
 Não podem ser cadastrados dois usuário com o mesmo e-mail.
 
-### GET - /users
-A rota deve retorna todos os dados dos usuários, com exceção da hash de senha.
-a rota pode ser acessada apenas por administradores.
+### GET - /clients
+A rota  retorna todos os dados dos usuários, com exceção da hash de senha.
 
 ### PATCH - /users/<id>
 Não é possível atualizar os campos id, isAdm e isActive.
