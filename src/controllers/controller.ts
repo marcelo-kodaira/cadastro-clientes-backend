@@ -1,17 +1,26 @@
 import { Request, Response } from "express"
 import { ICreateRequest, ILogin, IUpdateRequest } from "../interfaces/clients"
-import createService from "../services/createContact.service"
-import deleteService from "../services/deleteContact.service"
-import listService from "../services/listContacts.service"
+import createClientService from "../services/createClient.service"
+import createContactService from "../services/createContact.service"
+import deleteService from "../services/delete.service"
+import listService from "../services/list.service"
 import loginService from "../services/login.service"
-import updateService from "../services/updateContact.service"
+import updateService from "../services/update.service"
 
 
-const createController = async (req: Request, res: Response) =>{
+const createClientController = async (req: Request, res: Response) =>{
+
+    const data:ICreateRequest = req.body
+    const created = await createClientService(data)
+    return res.status(201).json(created)
+}
+
+const createContactController = async (req: Request, res: Response) =>{
 
     const data:ICreateRequest = req.body
     const repo = req.repository
-    const created = await createService(data,repo)
+    const clientId = req.user.id
+    const created = await createContactService(data,repo,clientId)
     return res.status(201).json(created)
 }
 
@@ -40,9 +49,9 @@ const deleteController = async (req: Request, res: Response) =>{
 const loginController = async (req: Request, res: Response) =>{
     const credentials:ILogin = req.body
     const repo = req.repository
-    const logged = await loginService(credentials,repo)
+    const logged = await loginService(credentials)
     return res.status(200).json(logged)
 }
 
 
-export {listController, createController, updateController, deleteController, loginController}
+export {listController, createClientController,createContactController, updateController, deleteController, loginController}

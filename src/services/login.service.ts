@@ -4,13 +4,12 @@ import 'dotenv/config'
 import AppDataSource from "../data-source";
 import AppError from "../Error/AppError";
 import { compareSync } from "bcrypt";
-import Contacts from "../entities/contacts.entity";
 import Clients from "../entities/clients.entity";
 
 
-const loginService = async ({email,senha}:ILogin, repo: typeof Contacts | typeof Clients):Promise<object> =>{
+const loginService = async ({email,senha}:ILogin):Promise<object> =>{
 
-    const repository = AppDataSource.getRepository(repo)
+    const repository = AppDataSource.getRepository(Clients)
 
     const user = await repository.findOneBy({email})
 

@@ -13,13 +13,18 @@ const listService = async (repo: typeof Contacts | typeof Clients):Promise<IPers
         throw new AppError('Nenhum registro encontrado',404)
     }
 
+    if (("senha" in list) && (repo === Clients)) {
+        const listNoPassword = list.map(obj => {
+          if (obj instanceof Clients) {
+            const {senha, ...rest} = obj as Clients;
+            return rest;
+          }
+          return obj;
+        });
+        return listNoPassword
+      } 
 
-    const listNoPassword = list.map(obj => {
-        const {senha, ...rest} = obj
-        return rest
-    })
-
-    return listNoPassword
+    return list
 }
 
 export default listService

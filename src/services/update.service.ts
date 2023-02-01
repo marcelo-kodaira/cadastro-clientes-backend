@@ -15,18 +15,31 @@ const updateService = async ({email,nome,telefone, senha:password}:IUpdateReques
         throw new AppError('Usuário não encontrado')
     }
 
+
+    if(repo === Clients){
+        const createdUser = repository.update(
+            id,{
+            nome,
+            email,
+            senha: password && hashSync(password, 10),
+            telefone
+        } as Clients)
+    }else{
     const updated = await repository.update(id,{
         email,
         nome,
         telefone,
-        senha : password && hashSync(password, 10)
     })
+    }
 
     const updatedUser = await repository.findOneBy({id})
 
-    const {senha, ...userNoPassword} = updatedUser!
+    if ("senha" in updatedUser!) {
+        const {senha, ...rest} = updatedUser;
+        return rest
+    }
 
-    return userNoPassword
+    return updatedUser!
 
 }
 export default updateService

@@ -16,8 +16,6 @@ class Contacts{
     @Column()
     email: string
 
-    @Column()
-    senha: string
 
     @CreateDateColumn()
     createdAt: Date

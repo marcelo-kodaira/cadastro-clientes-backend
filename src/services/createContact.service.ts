@@ -3,34 +3,29 @@ import AppDataSource from "../data-source"
 import { ICreateRequest, IPerson } from "../interfaces/clients"
 import Contacts from "../entities/contacts.entity"
 import Clients from "../entities/clients.entity"
-import { hashSync } from "bcrypt"
-import { sensitiveHeaders } from "http2"
 
-const createService = async ({nome, email,senha:password, telefone}:ICreateRequest, repo: typeof Contacts | typeof Clients):Promise<IPerson> =>{
+const createContactService = async ({nome, email,senha:password, telefone}:ICreateRequest, repo: typeof Contacts | typeof Clients, id:string):Promise<IPerson> =>{
 
 
-    const repository = AppDataSource.getRepository(repo)
+    const repositoryClients = AppDataSource.getRepository(Clients)
+    const repositoryContacts = AppDataSource.getRepository(Contacts)
 
-    const emailAlreadyExists = await repository.findOneBy({
-        email
+    const client = await repositoryClients.findOneBy({
+        id
     })
 
-    if(emailAlreadyExists){
-        throw new AppError('Email ja cadastrado')
-    }
-
-    const createdUser = repository.create({
+    const contact = repositoryContacts.create({
         nome,
         email,
-        senha: hashSync(password, 10),
         telefone
-    })
+    });
+    await repositoryContacts.save(contact)
 
-    const {senha, ...userNoPassword} = createdUser
+    client!.contacts.push(contact)
+    repositoryClients.save(client!)
 
-    await repository.save(createdUser)
-
-    return userNoPassword
+    return client!
 
 }
-export default createService
+
+export default createContactService
