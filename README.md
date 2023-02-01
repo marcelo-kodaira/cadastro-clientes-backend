@@ -19,8 +19,8 @@ Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
 | POST | /clients/login | Gera o token de autenticação |
 | POST | /contacts | Cria um contato | Precisa estar logado |
 | GET | /contacts/all | Lista todos os contatos cadastrados | Precisa ser Administrador |
-| PATCH | /contacts | Atualiza um contato | Precisa estar logado |
-| DELETE | /contacts | Deleta um contato | Precisa estar logado |
+| PATCH | /contacts/<:id> | Atualiza um contato | Precisa estar logado |
+| DELETE | /contacts/<:id> | Deleta um contato | Precisa estar logado |
 
 
 ## Requisições e retornos
@@ -30,7 +30,7 @@ Rota para criação de usuário com os seguintes dados:
 - id: uuidv4.
 - name: string
 - email: string
-- password: Deverá receber uma string mas armazenar uma hash gerada com o bcrypt
+- senha: Deverá receber uma string mas armazenar uma hash gerada com o bcrypt
 - createdAt: Gerado no momento da validação dos dados no formato Date
 - updatedAt: Gerado no momento da validação dos dados no formato Date
 
@@ -40,30 +40,29 @@ Não podem ser cadastrados dois usuário com o mesmo e-mail.
 ### GET - /clients
 A rota  retorna todos os dados dos usuários, com exceção da hash de senha.
 
-### PATCH - /users/<id>
-Não é possível atualizar os campos id, isAdm e isActive.
-Apenas administradores podem atualizar qualquer usuário, usuários não-administradores podem apenas atualizar seu próprio usuário.
+### PATCH - /clients
+A rota permite alterar os dados do cliente logado.
 
-### DELETE - /users/<id>
-A rota realiza um soft delete do usuário, alterando isActive para false.
-A rota pode ser acessada apenas por administradores.
-Não é possível realizar um soft delete de um usuário inativo.
+### DELETE - /clients
+A rota permite deletar o cliente logado.
 
-### POST - /login
+### POST - /clients/login
 Rota de login recebendo email e password
 O login valida se o usuário existe e valida se a senha está correta.
 
-### POST - /categories
-Rota para criação de categorias com os seguintes dados:
+### POST - /contacts
+Rota para criação de um contato relacionado ao cliente logado com os seguintes dados:
+- id: uuidv4.
 - name: string
-- id: Não deve ser passado mas gerado no momento da validação dos dados, deve um uuidv4.
-Não podem ser cadastradas duas categorias com o mesmo nome.
-A rota pode ser acessada apenas por administradores.
+- email: string
+- createdAt: Gerado no momento da validação dos dados no formato Date
+- updatedAt: Gerado no momento da validação dos dados no formato Date
 
-### GET - /categories
-Rota lista todas as categorias.
-A rota não precisa de autenticação para ser acessada.
+### GET - /contacts/all
+Rota lista todas as contatos cadastrados
 
-### GET - /categories/<id>
-Rota lista todos os agendamentos de um imóvel.
-A rota pode ser acessada apenas por administradores.
+### GET - /contacts/patch
+Rota permite ao usuário logado alterar informações dos seus contatos.
+
+### GET - /contacts/delete
+Rota permite ao usuário logado deletar seus contatos.
