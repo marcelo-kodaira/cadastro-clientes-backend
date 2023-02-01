@@ -61,6 +61,7 @@ O login valida se o usuário existe e valida se a senha está correta.
 Rota para criação de um contato relacionado ao cliente logado com os seguintes dados:
 - id: uuidv4.
 - name: string
+- telefone: string
 - email: string
 - createdAt: Gerado no momento da validação dos dados no formato Date
 - updatedAt: Gerado no momento da validação dos dados no formato Date
