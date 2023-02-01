@@ -12,11 +12,7 @@ const AppDataSource = new DataSource(
     } :
     {
         type: "postgres",
-        host: process.env.HOST,
-        username: process.env.POSTGRES_USER,
-        password: process.env.POSTGRES_PASSWORD,
-        database: process.env.POSTGRES_DB,
-        port: process.env.PORT ? 8020 : 5432,
+        url: process.env.PG_URL,
         logging: true,
         synchronize: false,
         entities: [path.join(__dirname, "./entities/*.{js,ts}")],
