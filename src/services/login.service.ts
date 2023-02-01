@@ -8,7 +8,7 @@ import Contacts from "../entities/contacts.entity";
 import Clients from "../entities/clients.entity";
 
 
-const loginService = async ({email,senha}:ILogin, repo: typeof Contacts | typeof Clients):Promise<string> =>{
+const loginService = async ({email,senha}:ILogin, repo: typeof Contacts | typeof Clients):Promise<object> =>{
 
     const repository = AppDataSource.getRepository(repo)
 
@@ -31,5 +31,13 @@ const loginService = async ({email,senha}:ILogin, repo: typeof Contacts | typeof
         }
       );
     
-    return token
+    return {
+        token: token,
+        user: {
+            nome: user.nome,
+            email: user.email
+        }
+    }
 }
+
+export default loginService

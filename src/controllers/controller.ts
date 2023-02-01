@@ -1,8 +1,9 @@
 import { Request, Response } from "express"
-import { ICreateRequest, IUpdateRequest } from "../interfaces/clients"
+import { ICreateRequest, ILogin, IUpdateRequest } from "../interfaces/clients"
 import createService from "../services/createContact.service"
 import deleteService from "../services/deleteContact.service"
 import listService from "../services/listContacts.service"
+import loginService from "../services/login.service"
 import updateService from "../services/updateContact.service"
 
 
@@ -36,5 +37,12 @@ const deleteController = async (req: Request, res: Response) =>{
     return res.status(200).json('Usuário deletado com sucesso')
 }
 
+const loginController = async (req: Request, res: Response) =>{
+    const credentials:ILogin = req.body
+    const repo = req.repository
+    const logged = await loginService(credentials,repo)
+    return res.status(200).json(logged)
+}
 
-export {listController, createController, updateController, deleteController}
+
+export {listController, createController, updateController, deleteController, loginController}

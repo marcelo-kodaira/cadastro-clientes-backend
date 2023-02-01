@@ -8,11 +8,7 @@ const addRepositoryToRequest = (req: Request, res: Response, next: NextFunction)
       req.repository = Contacts
     } else if (req.originalUrl.includes('clients')) {
       req.repository = Clients
-    }else {
-        return res.status(400).send({
-          error: 'req.originalUrl'
-        });
-      }
+    }
     next();
   };
 
