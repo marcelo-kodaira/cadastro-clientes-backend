@@ -13,7 +13,6 @@ const deleteService = async(id:string, repo: typeof Contacts | typeof Clients):P
     }
     
     await repository.delete(id)
-
 }
 
 export default deleteService

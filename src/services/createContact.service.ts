@@ -4,7 +4,7 @@ import { ICreateRequest, IPerson } from "../interfaces/clients"
 import Contacts from "../entities/contacts.entity"
 import Clients from "../entities/clients.entity"
 
-const createContactService = async ({nome, email,senha:password, telefone}:ICreateRequest, repo: typeof Contacts | typeof Clients, id:string):Promise<IPerson> =>{
+const createContactService = async ({nome, email,senha:password, telefone}:ICreateRequest, id:string):Promise<IPerson> =>{
 
 
     const repositoryClients = AppDataSource.getRepository(Clients)

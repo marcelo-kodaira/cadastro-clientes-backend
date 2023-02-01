@@ -25,11 +25,11 @@ const updateService = async ({email,nome,telefone, senha:password}:IUpdateReques
             telefone
         } as Clients)
     }else{
-    const updated = await repository.update(id,{
-        email,
-        nome,
-        telefone,
-    })
+        const updated = await repository.update(id,{
+            email,
+            nome,
+            telefone,
+        })
     }
 
     const updatedUser = await repository.findOneBy({id})

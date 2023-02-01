@@ -20,7 +20,7 @@ const createContactController = async (req: Request, res: Response) =>{
     const data:ICreateRequest = req.body
     const repo = req.repository
     const clientId = req.user.id
-    const created = await createContactService(data,repo,clientId)
+    const created = await createContactService(data,clientId)
     return res.status(201).json(created)
 }
 
