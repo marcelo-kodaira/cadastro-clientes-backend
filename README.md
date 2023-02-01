@@ -12,7 +12,7 @@ Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
 | Método | Endpoint | Responsabilidade | Autorização
 | --- | --- | --- | --- |
 | POST | /clients | Criação de cliente | 
-| GET | /clients/all | Lista todos os cliente | Precisa ser Administrador |
+| GET | /clients | Lista todos os cliente |
 | GET | /clients/contacts | Lista todos os contatos cadastrados pelo cliente |
 | PATCH | /clients | Atualiza um cliente | Precisa estar logado |
 | DELETE | /clients | Realiza o delete do cliente | Precisa estar logado |
