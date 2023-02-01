@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 import "dotenv/config"
+import path from "path"
 
 const AppDataSource = new DataSource(
     process.env.NODE_ENV === "test" ?
@@ -15,11 +16,11 @@ const AppDataSource = new DataSource(
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        port: 8020,
+        port: process.env.PORT ? 8020 : 5432,
         logging: true,
         synchronize: false,
-        entities: ['src/entities/*.ts'],
-        migrations: ['src/migrations/*.ts']
+        entities: [path.join(__dirname, "./entities/*.{js,ts}")],
+        migrations: [path.join(__dirname, "./migrations/*.{js,ts}")],
     }
 )
 
