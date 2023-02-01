@@ -42,7 +42,7 @@ A rota  retorna todos os dados dos usuários, com exceção da hash de senha.
 
 ### GET - /clients/contacts
 A rota  retorna todos os dados dos contatos associados aquele cliente.
-Paginação: a rota conta com sistema de paginação por parametro, possuindo page, e pagesize, se não passados os valores default são 1 e 60
+Paginação: a rota conta com sistema de paginação por parametro, possuindo page, e pagesize, se não passados os valores default são 1 e 60 respectivamente.
 
 ### PATCH - /clients
 A rota permite alterar os dados do cliente logado.
