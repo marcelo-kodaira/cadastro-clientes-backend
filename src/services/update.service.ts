@@ -29,6 +29,7 @@ const updateService = async ({email,nome,telefone, senha:password}:IUpdateReques
         return rest
     }else{
         const contactRelated = await repositoryContacts.findOneBy({
+            id: id,
             clients: clientFound!
         })
         if(!contactRelated){
