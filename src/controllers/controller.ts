@@ -37,7 +37,7 @@ const updateController = async (req: Request, res: Response) =>{
     const repo = req.repository
     const {id} = req.params
     const clientId = req.user.id
-    const updated = await updateService(data,repo,id, clientId)
+    const updated = await updateService(data,repo, clientId, id)
     return res.status(200).json(updated)
 }
 

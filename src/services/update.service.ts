@@ -5,11 +5,10 @@ import { IPerson, IUpdateRequest } from "../interfaces/clients"
 import AppError from "../Error/AppError"
 import { hashSync } from "bcrypt"
 
-const updateService = async ({email,nome,telefone, senha:password}:IUpdateRequest, repo: typeof Contacts | typeof Clients, id:string, clientId: string ):Promise<IPerson> =>{
+const updateService = async ({email,nome,telefone, senha:password}:IUpdateRequest, repo: typeof Contacts | typeof Clients, clientId: string,id?:string ):Promise<IPerson> =>{
 
     const repositoryClients = AppDataSource.getRepository(Clients)
     const repositoryContacts = AppDataSource.getRepository(Contacts)
-    const repository = AppDataSource.getRepository(repo)
 
     const clientFound = await repositoryClients.findOneBy({
         id: clientId
@@ -17,12 +16,17 @@ const updateService = async ({email,nome,telefone, senha:password}:IUpdateReques
 
     if(repo === Clients){
         await repositoryClients.update(
-            id,{
+            clientId,{
             nome,
             email,
             senha: password && hashSync(password, 10),
             telefone
         })
+        const updatedClient = await repositoryClients.findOneBy({
+            id: clientId
+        })
+        const {senha, ...rest} = updatedClient!;
+        return rest
     }else{
         const contactRelated = await repositoryContacts.findOneBy({
             clients: clientFound!
@@ -31,21 +35,14 @@ const updateService = async ({email,nome,telefone, senha:password}:IUpdateReques
             throw new AppError('Você não pode alterar este contato', 403)
         }
 
-        await repositoryContacts.update(id,{
+        await repositoryContacts.update(id!,{
             email,
             nome,
             telefone,
         })
+        const updatedContact = await repositoryContacts.findOneBy({id})
+        return updatedContact!
     }
-
-    const updatedUser = await repository.findOneBy({id})
-
-    if ("senha" in updatedUser!) {
-        const {senha, ...rest} = updatedUser;
-        return rest
-    }
-
-    return updatedUser!
 
 }
 export default updateService
