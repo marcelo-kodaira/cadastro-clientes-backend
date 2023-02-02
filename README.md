@@ -59,7 +59,7 @@ O login valida se o usuário existe e valida se a senha está correta.
 
 ### POST - /contacts
 Rota para criação de um contato relacionado ao cliente logado com os seguintes dados:
-- id: uuidv4.
+- id: uuidv4 gerado pelo banco de dados.
 - name: string
 - telefone: string
 - email: string
