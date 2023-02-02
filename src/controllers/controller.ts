@@ -20,7 +20,6 @@ const createContactController = async (req: Request, res: Response) =>{
 
     const data:ICreateRequest = req.body
     const clientId = req.user.id
-    console.log(clientId)
     const created = await createContactService(data,clientId)
     return res.status(201).json(created)
 }
@@ -35,16 +34,16 @@ const listController = async (req: Request, res: Response) =>{
 const updateController = async (req: Request, res: Response) =>{
     const data:IUpdateRequest = req.body
     const repo = req.repository
-    const {id} = req.params
     const clientId = req.user.id
+    const id = req.params && req.params.id
     const updated = await updateService(data,repo, clientId, id)
     return res.status(200).json(updated)
 }
 
 const deleteController = async (req: Request, res: Response) =>{
-    const id = req.params && req.params.id
     const clientId = req.user.id
     const repo = req.repository
+    const id = req.params && req.params.id
     await deleteService(clientId,repo,id)
     return res.status(200).json('Usuário deletado com sucesso')
 }
