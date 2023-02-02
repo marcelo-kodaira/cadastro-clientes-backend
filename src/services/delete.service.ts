@@ -9,8 +9,6 @@ const deleteService = async(clientId: string, repo: typeof Contacts | typeof Cli
 
     
     if(repo === Clients){
-        console.log('opaaaaaaasssssssssssss')
-        console.log(clientId)
         await repository.delete(clientId)
     }else{
         const contactFound = await repository.findOneBy({
