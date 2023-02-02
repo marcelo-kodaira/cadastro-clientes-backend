@@ -9,7 +9,7 @@ clientRoutes.post("",addRepositoryToRequest,createClientController)
 clientRoutes.post("/login",addRepositoryToRequest,loginController)
 clientRoutes.get("",addRepositoryToRequest,listController) // lista todos os clientes
 clientRoutes.get("/contacts",authMiddleware,listClientsContactsController) //lista todos os contatos do cliente
-clientRoutes.patch("/",addRepositoryToRequest,updateController)
+clientRoutes.patch("",authMiddleware,addRepositoryToRequest,updateController)
 clientRoutes.delete("",authMiddleware,addRepositoryToRequest,deleteController)
 
 export default clientRoutes
