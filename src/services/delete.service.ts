@@ -18,7 +18,7 @@ const deleteService = async(clientId: string, repo: typeof Contacts | typeof Cli
             }
         })
         if(!contactFound){
-            throw new AppError('Contato não encontrado ou o usuário não permite permissão para deletar este contato',404)
+            throw new AppError('Contato não encontrado ou o usuário não tem permissão para deletar este contato',404)
         }
         await repository.delete(contactId!)
     }

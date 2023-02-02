@@ -10,7 +10,6 @@ const updateService = async ({email,nome,telefone, senha:password}:IUpdateReques
     const repositoryClients = AppDataSource.getRepository(Clients)
     const repositoryContacts = AppDataSource.getRepository(Contacts)
 
-
     if(repo === Clients){
         await repositoryClients.update(
             clientId,{
@@ -25,17 +24,16 @@ const updateService = async ({email,nome,telefone, senha:password}:IUpdateReques
         const {senha, ...rest} = updatedClient!;
         return rest
     }else{
-        const clientFound = await repositoryClients.findOneBy({
-            id: clientId
-        })
         const contactRelated = await repositoryContacts.findOneBy({
             id: id,
-            clients: clientFound!
+            clients: {
+                id: clientId
+            }
         })
         if(!contactRelated){
             throw new AppError('Você não pode alterar este contato', 403)
         }
-
+        
         await repositoryContacts.update(id!,{
             email,
             nome,
