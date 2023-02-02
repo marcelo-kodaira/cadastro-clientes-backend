@@ -8,6 +8,9 @@ Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
 - Framework Jest para realização de testes.
 - Framework Express para criação de rotas e APIs REST.
 
+## URL
+https://cadastro-clientes-backend-production.up.railway.app
+
 ## Endpoints
 | Método | Endpoint | Responsabilidade | Autorização
 | --- | --- | --- | --- |
@@ -56,8 +59,9 @@ O login valida se o usuário existe e valida se a senha está correta.
 
 ### POST - /contacts
 Rota para criação de um contato relacionado ao cliente logado com os seguintes dados:
-- id: uuidv4.
+- id: uuidv4 gerado pelo banco de dados.
 - name: string
+- telefone: string
 - email: string
 - createdAt: Gerado no momento da validação dos dados no formato Date
 - updatedAt: Gerado no momento da validação dos dados no formato Date
