@@ -33,6 +33,7 @@ const loginService = async ({email,senha}:ILogin):Promise<object> =>{
     return {
         token: token,
         user: {
+            id: user.id,
             nome: user.nome,
             email: user.email
         }

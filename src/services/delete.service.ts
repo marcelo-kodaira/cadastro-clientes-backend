@@ -14,7 +14,7 @@ const deleteService = async(clientId: string, repo: typeof Contacts | typeof Cli
         const contactFound = await repository.findOneBy({
             id:contactId,
             clients:{
-                id: clientId
+                id: clientId!
             }
         })
         if(!contactFound){
