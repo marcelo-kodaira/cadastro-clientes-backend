@@ -11,6 +11,7 @@ const createClientService = async ({nome, email,senha:password, telefone}:ICreat
     const emailAlreadyExists = await repository.findOneBy({
         email
     })
+    
 
     if(emailAlreadyExists){
         throw new AppError('Email ja cadastrado')
