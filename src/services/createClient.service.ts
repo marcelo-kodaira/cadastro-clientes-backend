@@ -6,7 +6,6 @@ import { hashSync } from "bcrypt"
 
 const createClientService = async ({nome, email,senha:password, telefone}:ICreateRequest):Promise<IPerson> =>{
 
-
     const repository = AppDataSource.getRepository(Clients)
 
     const emailAlreadyExists = await repository.findOneBy({
