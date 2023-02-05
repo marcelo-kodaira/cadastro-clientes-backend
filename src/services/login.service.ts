@@ -35,7 +35,8 @@ const loginService = async ({email,senha}:ILogin):Promise<object> =>{
         user: {
             id: user.id,
             nome: user.nome,
-            email: user.email
+            email: user.email,
+            telefone: user.telefone
         }
     }
 }
