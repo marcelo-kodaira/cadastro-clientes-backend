@@ -66,6 +66,8 @@ Rota para criação de um contato relacionado ao cliente logado com os seguintes
 - createdAt: Gerado no momento da validação dos dados no formato Date
 - updatedAt: Gerado no momento da validação dos dados no formato Date
 
+Não podem ser cadastrados dois contatos com o mesmo e-mail.
+
 ### GET - /contacts/all
 Rota lista todas as contatos cadastrados
 
