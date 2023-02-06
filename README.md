@@ -7,6 +7,7 @@ Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
 - Biblioteca jsonwebtoken (JWT) para autenticação de usuários.
 - Framework Jest para realização de testes.
 - Framework Express para criação de rotas e APIs REST.
+- TypeORM
 
 ## Instalação
 - Execute yarn install ou npm install para instalar as dependências do projeto
