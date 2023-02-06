@@ -9,14 +9,14 @@ Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
 - Framework Express para criação de rotas e APIs REST.
 
 ## Instalação
-1- Execute yarn install ou npm install para instalar as dependências do projeto
-2- Crie um arquivo .env seguindo o padrão indicado no arquivo .env.example
-3- Crie um banco de dados com o Postgres
-4- No .env insira a SECRET_KEY e uma DatabaseURL com o seguinte padrão:
+- Execute yarn install ou npm install para instalar as dependências do projeto
+- Crie um arquivo .env seguindo o padrão indicado no arquivo .env.example
+- Crie um banco de dados com o Postgres
+- No .env insira a SECRET_KEY e uma DatabaseURL com o seguinte padrão:
 postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
-5- Um exemplo de Database URL: postgresql://frederico:12345@localhost:3000/bd_desafio_s3?schema=public
-6- Execute o comando yarn dev para lançar a aplicação no ambiente de desenvolvimento
-7- Rode as migrations com o comandos:
+- Um exemplo de Database URL: postgresql://frederico:12345@localhost:3000/bd_desafio_s3?schema=public
+- Execute o comando yarn dev para lançar a aplicação no ambiente de desenvolvimento
+- Rode as migrations com o comandos:
 ```
 yarn typeorm migration:run -d src/data-source.ts
 ```
