@@ -1,4 +1,4 @@
-# cadastro-clientes-backend
+# My Agenda Backend
 
 ## Tecnologias
 Este sistema foi desenvolvido em Node.js utilizando as seguintes tecnologias:
