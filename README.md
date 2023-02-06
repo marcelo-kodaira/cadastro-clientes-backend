@@ -70,6 +70,7 @@ A rota permite deletar o cliente logado.
 ### POST - /clients/login
 Rota de login recebendo email e password
 O login valida se o usuário existe e valida se a senha está correta.
+A rota retorn o token e um objeto user, contendo o nome, email,telefone e id to usuário que realizou o login
 
 ### POST - /contacts
 Rota para criação de um contato relacionado ao cliente logado com os seguintes dados:
